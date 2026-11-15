@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "underdog-api"
+version = "0.1.0"
+description = "Python client for Underdog API: Underdog Fantasy pick'em lines, Higher/Lower multipliers, line history and graded results."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Stunning Couches LLC", email = "support@underdogapi.com" }]
+keywords = ["underdog", "underdog fantasy", "pick'em", "player props", "dfs", "sports data", "api"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Libraries",
+]
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/underdogapi/underdogapi-python"
+Issues = "https://github.com/underdogapi/underdogapi-python/issues"
+Homepage = "https://underdogapi.com"
+Documentation = "https://underdogapi.com/docs"
+Pricing = "https://underdogapi.com/pricing"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/underdog_api"]
