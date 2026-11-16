@@ -1,6 +1,12 @@
-# underdog-api (Python)
+# Underdog API for Python: underdog-api
 
-Python client for [Underdog API](https://underdogapi.com): Underdog Fantasy pick'em lines with separate Higher and
+The Underdog API Python client for Underdog Fantasy pick'em data. `pip install underdog-api` and read current Underdog lines with separate Higher and Lower payouts, every recorded line move, past boards and graded results.
+
+[Website](https://underdogapi.com/?utm_source=github&utm_medium=readme&utm_campaign=underdogapi-python) | [Docs](https://underdogapi.com/docs?utm_source=github&utm_medium=readme&utm_campaign=underdogapi-python) | [Free API key](https://underdogapi.com/sign-up?utm_source=github&utm_medium=readme&utm_campaign=underdogapi-python) | [Pricing](https://underdogapi.com/pricing?utm_source=github&utm_medium=readme&utm_campaign=underdogapi-python) | [All SDKs](https://underdogapi.com/sdks?utm_source=github&utm_medium=readme&utm_campaign=underdogapi-python)
+
+Also for underdogapi.com: [JavaScript: `npm install underdog-api`](https://github.com/underdogapi/underdogapi-js) | [MCP server: `npx -y underdog-api-mcp`](https://github.com/underdogapi/underdogapi-mcp)
+
+Python client for [Underdog API](https://underdogapi.com/?utm_source=github&utm_medium=readme&utm_campaign=underdogapi-python): Underdog Fantasy pick'em lines with separate Higher and
 Lower payout multipliers, every recorded line move since 6 Nov 2026, the board at any past instant, and graded results.
 Standard library only; Python 3.9+.
 
@@ -74,7 +80,7 @@ df = pd.json_normalize(rows)
 - Every method returns the parsed JSON body (`data` and `meta`). `ud.get(path, **params)` reaches any documented path.
 - Per-minute 429s and 5xx answers are retried with backoff; the monthly credit 429 is raised at once.
 - Credits: one per started 100 rows on simple reads; `ud.credit_costs()` returns the policy with no key.
-- Reference: https://underdogapi.com/docs · Plans: https://underdogapi.com/pricing
+- Reference: https://underdogapi.com/docs?utm_source=github&utm_medium=readme&utm_campaign=underdogapi-python · Plans: https://underdogapi.com/pricing?utm_source=github&utm_medium=readme&utm_campaign=underdogapi-python
 
 ## Tests
 
