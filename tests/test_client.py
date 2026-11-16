@@ -21,6 +21,16 @@ class Fake:
 
 
 class ClientTest(unittest.TestCase):
+    def test_demo_dict_first_argument_is_params(self):
+        fake = Fake([(200, {"data": [], "meta": {}}), (200, {"data": [], "meta": {}})])
+        c = Client(transport=fake)
+        c.demo({"league": "NBA", "limit": 1})
+        c.demo({"resource": "changes", "league": "NFL"})
+        self.assertIn("/api/v1/demo/projections?", fake.calls[0][1])
+        self.assertIn("/api/v1/demo/changes?", fake.calls[1][1])
+        with self.assertRaises(ValueError):
+            c.demo("boards")
+
     def test_sends_bearer_key_and_filters(self):
         fake = Fake([(200, {"data": [{"id": "udm_1"}], "meta": {"next_cursor": None}})])
         body = Client(api_key="ud_test", transport=fake).projections(league="NBA", view="compact", limit=5)

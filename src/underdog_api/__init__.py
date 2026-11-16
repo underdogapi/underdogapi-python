@@ -22,11 +22,13 @@ import urllib.request
 from typing import Any, Callable, Dict, Iterator, Optional
 
 __all__ = ["Client", "UnderdogAPIError", "PlanLimitError", "__version__"]
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 DEFAULT_BASE_URL = "https://underdogapi.com"
 Transport = Callable[[str, str, Dict[str, str], float], "tuple[int, Dict[str, str], bytes]"]
 
+
+DEMO_RESOURCES = ("projections", "changes", "coverage", "export", "payouts")
 
 class UnderdogAPIError(Exception):
     """A non-2xx answer. `code`, `message` and the full `body` come from the API's error object."""
@@ -172,8 +174,14 @@ class Client:
         """The credit policy, or the quote for one request path. No key needed."""
         return self.get("/api/v1/credit-costs", path=path)
 
-    def demo(self, resource: str = "projections", **p: Any) -> Any:
+    def demo(self, resource: Any = "projections", **p: Any) -> Any:
         """Fictional rows in the live shape, no key: projections, changes, coverage, export, payouts."""
+        # demo({"league": "NBA"}) used to request /api/v1/demo/{'league': ...}; a dict first argument is the params.
+        if isinstance(resource, dict):
+            params = {**resource, **p}
+            return self.demo(params.pop("resource", "projections"), **params)
+        if resource not in DEMO_RESOURCES:
+            raise ValueError(f"demo resource must be one of {', '.join(DEMO_RESOURCES)}; got {resource!r}")
         return self.get(f"/api/v1/demo/{resource}", **p)
 
 
